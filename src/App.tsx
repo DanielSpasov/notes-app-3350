@@ -1,8 +1,12 @@
+import { BrowserRouter } from 'react-router-dom';
+
+import Router from './Router';
+
 const App = () => {
   return (
-    <main>
-      <h1 className="text-center bg-green-500">Header</h1>
-    </main>
+    <BrowserRouter>
+      <Router />
+    </BrowserRouter>
   );
 };
 
