@@ -1,18 +1,17 @@
 import { Link } from 'react-router-dom';
 import { FC } from 'react';
 
-import { INote } from '../types/Note';
+import CloseIcon from '../../svgs/Close';
 
-import CloseIcon from '../svgs/Close';
-
-type NoteProps = {
-  note: INote;
-  onRemove: (note: INote) => void;
-};
+import { NoteProps, responsiveProps } from './helpers';
 
 const Note: FC<NoteProps> = ({ note, onRemove }) => {
   return (
-    <article className="flex flex-col min-w-64 w-64 min-h-64 max-h-64 shadow-sm shadow-neutral-400 rounded-md m-3 hover:scale-105">
+    <article
+      className={`flex flex-col shadow-sm shadow-neutral-400 rounded-md hover:scale-105 m-4 ${Object.values(
+        responsiveProps.note
+      ).join(' ')}`}
+    >
       <header className="flex justify-between rounded-t-md bg-yellow-300">
         <Link
           to={`${note.id}`}
@@ -26,7 +25,7 @@ const Note: FC<NoteProps> = ({ note, onRemove }) => {
           onClick={() => onRemove(note)}
         />
       </header>
-      <p className="pl-2 h-full break-words overflow-y-auto">{note.content}</p>
+      <p className="px-2 h-full break-words overflow-y-auto">{note.content}</p>
     </article>
   );
 };

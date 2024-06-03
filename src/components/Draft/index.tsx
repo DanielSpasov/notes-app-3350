@@ -1,28 +1,19 @@
-import { Dispatch, FC, RefObject, SetStateAction, useCallback } from 'react';
+import { FC, useCallback } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-import CloseIcon from '../svgs/Close';
-import PlusIcon from '../svgs/Plus';
+import CloseIcon from '../../svgs/Close';
+import PlusIcon from '../../svgs/Plus';
 
-import { INote } from '../types/Note';
+import { DraftProps, responsiveProps } from './helpers';
 
-type DraftNoteProps = {
-  setDraft: Dispatch<SetStateAction<boolean>>;
-  onAdd: (note: INote) => void;
-  noteRef: RefObject<HTMLDivElement>;
-};
-
-const DraftNote: FC<DraftNoteProps> = ({ setDraft, onAdd, noteRef }) => {
+const Draft: FC<DraftProps> = ({ setDraft, onAdd, noteRef }) => {
   const handleAdd = useCallback(() => {
     const titleEl = document.getElementById('title') as HTMLInputElement;
     const contentEl = document.getElementById('content') as HTMLTextAreaElement;
 
-    if (!titleEl.value) {
-      titleEl.focus();
-      return;
-    }
-    if (!contentEl.value) {
-      contentEl.focus();
+    if (!titleEl.value || !contentEl.value) {
+      if (!titleEl.value) titleEl.focus();
+      if (!contentEl.value) contentEl.focus();
       return;
     }
 
@@ -36,12 +27,14 @@ const DraftNote: FC<DraftNoteProps> = ({ setDraft, onAdd, noteRef }) => {
 
   return (
     <article
-      className="relative w-64 h-64 shadow-sm shadow-neutral-400 rounded-md m-3"
+      className={`relative shadow-sm shadow-neutral-400 rounded-md m-4 ${Object.values(
+        responsiveProps.note
+      ).join(' ')}`}
       ref={noteRef}
     >
       <header className="flex justify-between items-center bg-yellow-300 p-2 rounded-t-md">
         <input
-          className="border-b-neutral-100 border-b-2 bg-transparent outline-none"
+          className="border-b-neutral-100 w-[85%] border-b-2 bg-transparent outline-none"
           placeholder="Note Title..."
           name="title"
           id="title"
@@ -53,7 +46,9 @@ const DraftNote: FC<DraftNoteProps> = ({ setDraft, onAdd, noteRef }) => {
       </header>
 
       <textarea
-        className="w-full max-h-52 min-h-52 resize-none p-2 outline-none [&~svg]:hover:opacity-70"
+        className={`w-full resize-none px-2 outline-none [&~svg]:hover:opacity-70 ${Object.values(
+          responsiveProps.textarea
+        ).join(' ')}`}
         placeholder="Note content..."
         id="content"
       />
@@ -68,4 +63,4 @@ const DraftNote: FC<DraftNoteProps> = ({ setDraft, onAdd, noteRef }) => {
   );
 };
 
-export default DraftNote;
+export default Draft;
