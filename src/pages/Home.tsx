@@ -12,11 +12,9 @@ const Home = () => {
 
   return (
     <main>
-      <h1 className="text-lg p-2">Your Notes</h1>
-
-      <article className="flex">
+      <article className="flex flex-wrap">
         {notes.map(note => (
-          <Note note={note} onRemove={onRemove} />
+          <Note key={note.id} note={note} onRemove={onRemove} />
         ))}
 
         {draft ? (
@@ -25,7 +23,7 @@ const Home = () => {
           <Icon
             model="plus"
             onClick={() => setDraft(true)}
-            className="w-12 h-12 p-3 shadow-sm shadow-neutral-400 hover:bg-neutral-100 mx-3 rounded-md cursor-pointer"
+            className="w-12 h-12 p-3 m-3 shadow-sm shadow-neutral-400 hover:bg-neutral-100 mx-3 rounded-md cursor-pointer"
           />
         )}
       </article>
