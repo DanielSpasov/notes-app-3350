@@ -34,7 +34,7 @@ const Draft: FC<DraftProps> = ({ setDraft, onAdd, noteRef }) => {
     >
       <header className="flex justify-between items-center bg-yellow-300 p-2 rounded-t-md">
         <input
-          className="border-b-neutral-100 w-[85%] border-b-2 bg-transparent outline-none"
+          className="border-b-neutral-100 w-[70%] border-b-2 bg-transparent outline-none"
           placeholder="Note Title..."
           name="title"
           id="title"
