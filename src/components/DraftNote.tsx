@@ -1,7 +1,9 @@
 import { Dispatch, FC, SetStateAction, useCallback } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-import Icon from './Icon';
+import CloseIcon from '../svgs/Close';
+import PlusIcon from '../svgs/Plus';
+
 import { INote } from '../types/Note';
 
 type DraftNoteProps = {
@@ -13,6 +15,16 @@ const DraftNote: FC<DraftNoteProps> = ({ setDraft, onAdd }) => {
   const handleAdd = useCallback(() => {
     const titleEl = document.getElementById('title') as HTMLInputElement;
     const contentEl = document.getElementById('content') as HTMLTextAreaElement;
+
+    if (!titleEl.value) {
+      titleEl.focus();
+      return;
+    }
+    if (!contentEl.value) {
+      contentEl.focus();
+      return;
+    }
+
     onAdd({
       id: uuidv4(),
       title: titleEl.value,
@@ -22,7 +34,7 @@ const DraftNote: FC<DraftNoteProps> = ({ setDraft, onAdd }) => {
   }, [onAdd, setDraft]);
 
   return (
-    <article className="relative w-64 h-64 shadow-sm shadow-neutral-400 rounded-md mx-3">
+    <article className="relative w-64 h-64 shadow-sm shadow-neutral-400 rounded-md m-3">
       <header className="flex justify-between items-center bg-yellow-300 p-2 rounded-t-md">
         <input
           className="border-b-neutral-100 border-b-2 bg-transparent outline-none"
@@ -30,8 +42,7 @@ const DraftNote: FC<DraftNoteProps> = ({ setDraft, onAdd }) => {
           name="title"
           id="title"
         />
-        <Icon
-          model="close"
+        <CloseIcon
           className="p-1 w-7 h-7 hover:bg-white rounded-md cursor-pointer"
           onClick={() => setDraft(false)}
         />
@@ -43,11 +54,10 @@ const DraftNote: FC<DraftNoteProps> = ({ setDraft, onAdd }) => {
         id="content"
       />
 
-      <Icon
-        model="plus"
+      <PlusIcon
         tabIndex={0}
         onKeyDown={e => e.key === 'Enter' && handleAdd()}
-        className="absolute bottom-0 right-0 bg-blue-400 [&>path]:stroke-white w-8 h-8 p-1 rounded-md m-1 outline-none cursor-pointer opacity-0 hover:opacity-100"
+        className="absolute bottom-0 right-0 bg-blue-400 [&>path]:stroke-white w-8 h-8 p-1 rounded-md m-1 outline-none cursor-pointer opacity-0 hover:opacity-100 focus:opacity-100"
         onClick={() => handleAdd()}
       />
     </article>

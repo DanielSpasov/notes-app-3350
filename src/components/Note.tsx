@@ -2,7 +2,8 @@ import { Link } from 'react-router-dom';
 import { FC } from 'react';
 
 import { INote } from '../types/Note';
-import Icon from './Icon';
+
+import CloseIcon from '../svgs/Close';
 
 type NoteProps = {
   note: INote;
@@ -20,8 +21,7 @@ const Note: FC<NoteProps> = ({ note, onRemove }) => {
           {note.title}
         </Link>
 
-        <Icon
-          model="close"
+        <CloseIcon
           className="my-2 mr-2 p-1 min-w-6 min-h-6 rounded-md cursor-pointer hover:bg-white"
           onClick={() => onRemove(note)}
         />

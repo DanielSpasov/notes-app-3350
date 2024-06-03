@@ -21,8 +21,14 @@ const useNotes = () => {
     []
   );
 
+  const get = useCallback(
+    (id: string) => notes.find(note => note.id === id),
+    [notes]
+  );
+
   return {
     notes,
+    get,
     onAdd,
     onRemove
   };
