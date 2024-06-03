@@ -10,19 +10,17 @@ export type DraftProps = {
 
 export const responsiveProps = {
   note: {
-    xs: 'w-36 h-36 text-sm',
-    sm: 'sm:w-40 sm:h-40 sm:text-md',
-    md: 'md:w-44 md:h-44',
-    lg: 'lg:w-48 lg:h-48',
-    xl: 'xl:w-52 xl:h-52 xl:text-lg',
-    '2xl': '2xl:w-64 2xl:h-64'
+    sm: ['w-40', 'h-40', 'text-md'],
+    md: ['w-44', 'h-44'],
+    lg: ['w-48', 'h-48'],
+    xl: ['w-52', 'h-52', 'text-lg'],
+    '2xl': ['w-64', 'h-64']
   },
   textarea: {
-    xs: 'max-h-24 min-h-24 text-sm',
-    sm: 'sm:max-h-28 sm:min-h-28 sm:text-md',
-    md: 'md:max-h-32 md:min-h-32',
-    lg: 'lg:max-h-36 lg:min-h-36',
-    xl: 'xl:max-h-40 xl:min-h-40 xl:text-lg',
-    '2xl': '2xl:max-h-52 2xl:min-h-52'
+    sm: ['max-h-28', 'min-h-28', 'text-md'],
+    md: ['max-h-32', 'min-h-32'],
+    lg: ['max-h-36', 'min-h-36'],
+    xl: ['max-h-40', 'min-h-40', 'text-lg'],
+    '2xl': ['max-h-52', 'min-h-52']
   }
 };

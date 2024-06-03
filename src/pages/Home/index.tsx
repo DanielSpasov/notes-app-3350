@@ -1,14 +1,14 @@
 import { useMemo, useRef, useState } from 'react';
 
-import Draft from '../components/Draft';
-import Note from '../components/Note';
+import Draft from '../../components/Draft';
+import Note from '../../components/Note';
 
-import useNotes from '../hooks/useNote';
+import useNotes from '../../hooks/useNote';
 
-import PlusIcon from '../svgs/Plus';
+import PlusIcon from '../../svgs/Plus';
 
-const buttonStyle =
-  'px-2 outline-none bg-blue-500 text-white enabled:hover:bg-blue-400 disabled:bg-blue-300';
+import { buttonStyle, responsiveProps } from './helpers';
+import { getResponsiveProps } from '../../utils';
 
 const Home = () => {
   const { notes, onAdd, onRemove, pagination } = useNotes();
@@ -25,7 +25,11 @@ const Home = () => {
 
   return (
     <main className="flex flex-col justify-between h-screen">
-      <article className="flex flex-wrap">
+      <article
+        className={`grid grid-cols-2 ${getResponsiveProps(
+          responsiveProps.grid
+        )}`}
+      >
         {notes.map(note => (
           <Note key={note.id} note={note} onRemove={onRemove} />
         ))}

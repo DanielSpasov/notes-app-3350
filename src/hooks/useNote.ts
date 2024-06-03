@@ -25,14 +25,23 @@ const useNotes = () => {
     localStorage.setItem('notes', JSON.stringify(allNotes));
   }, [allNotes]);
 
+  const onNext = useCallback(() => setPage(prev => prev + 1), []);
+  const onPrev = useCallback(() => setPage(prev => prev - 1), []);
+
   const onAdd = useCallback(
-    (note: INote) => setAllNotes(prev => [...prev, note]),
-    []
+    (note: INote) => {
+      if (notes.length === 15) onNext();
+      setAllNotes(prev => [...prev, note]);
+    },
+    [notes, onNext]
   );
 
   const onRemove = useCallback(
-    (note: INote) => setAllNotes(prev => prev.filter(n => n.id !== note.id)),
-    []
+    (note: INote) => {
+      if (notes.length === 1 && page > 1) onPrev();
+      setAllNotes(prev => prev.filter(n => n.id !== note.id));
+    },
+    [notes, page, onPrev]
   );
 
   const get = useCallback(
@@ -49,8 +58,8 @@ const useNotes = () => {
       page,
       canNext: page * 15 < allNotes.length,
       canPrev: page > 1,
-      onNext: () => setPage(prev => prev + 1),
-      onPrev: () => setPage(prev => prev - 1),
+      onNext,
+      onPrev,
       onFirst: () => setPage(1),
       onLast: () => setPage(Math.ceil(allNotes.length / 15))
     }

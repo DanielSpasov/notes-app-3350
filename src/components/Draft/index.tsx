@@ -5,6 +5,7 @@ import CloseIcon from '../../svgs/Close';
 import PlusIcon from '../../svgs/Plus';
 
 import { DraftProps, responsiveProps } from './helpers';
+import { getResponsiveProps } from '../../utils';
 
 const Draft: FC<DraftProps> = ({ setDraft, onAdd, noteRef }) => {
   const handleAdd = useCallback(() => {
@@ -25,11 +26,13 @@ const Draft: FC<DraftProps> = ({ setDraft, onAdd, noteRef }) => {
     setDraft(false);
   }, [onAdd, setDraft]);
 
+  console.log(getResponsiveProps(responsiveProps.textarea));
+
   return (
     <article
-      className={`relative shadow-sm shadow-neutral-400 rounded-md m-4 ${Object.values(
+      className={`relative shadow-sm shadow-neutral-400 rounded-md m-4 w-36 h-36 text-sm ${getResponsiveProps(
         responsiveProps.note
-      ).join(' ')}`}
+      )}`}
       ref={noteRef}
     >
       <header className="flex justify-between items-center bg-yellow-300 p-2 rounded-t-md">
@@ -46,9 +49,9 @@ const Draft: FC<DraftProps> = ({ setDraft, onAdd, noteRef }) => {
       </header>
 
       <textarea
-        className={`w-full resize-none px-2 outline-none [&~svg]:hover:opacity-70 ${Object.values(
+        className={`w-full resize-none px-2 outline-none [&~svg]:hover:opacity-70 max-h-24 min-h-24 text-sm ${getResponsiveProps(
           responsiveProps.textarea
-        ).join(' ')}`}
+        )}`}
         placeholder="Note content..."
         id="content"
       />

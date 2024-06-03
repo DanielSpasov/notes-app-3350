@@ -4,13 +4,14 @@ import { FC } from 'react';
 import CloseIcon from '../../svgs/Close';
 
 import { NoteProps, responsiveProps } from './helpers';
+import { getResponsiveProps } from '../../utils';
 
 const Note: FC<NoteProps> = ({ note, onRemove }) => {
   return (
     <article
-      className={`flex flex-col shadow-sm shadow-neutral-400 rounded-md hover:scale-105 m-4 ${Object.values(
+      className={`flex flex-col shadow-sm shadow-neutral-400 rounded-md hover:scale-105 m-4 w-36 h-36 text-sm ${getResponsiveProps(
         responsiveProps.note
-      ).join(' ')}`}
+      )}`}
     >
       <header className="flex justify-between rounded-t-md bg-yellow-300">
         <Link

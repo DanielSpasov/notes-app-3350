@@ -7,11 +7,10 @@ export type NoteProps = {
 
 export const responsiveProps = {
   note: {
-    xs: 'w-36 h-36 text-sm',
-    sm: 'sm:w-40 sm:h-40 sm:text-md',
-    md: 'md:w-44 md:h-44',
-    lg: 'lg:w-48 lg:h-48',
-    xl: 'xl:w-52 xl:h-52 xl:text-lg',
-    '2xl': '2xl:w-64 2xl:h-64'
+    sm: ['w-40', 'h-40', 'text-md'],
+    md: ['w-44', 'h-44'],
+    lg: ['w-48', 'h-48'],
+    xl: ['w-52', 'h-52', 'text-lg'],
+    '2xl': ['w-64', 'h-64']
   }
 };
