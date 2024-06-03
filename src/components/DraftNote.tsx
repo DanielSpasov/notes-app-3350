@@ -1,4 +1,4 @@
-import { Dispatch, FC, SetStateAction, useCallback } from 'react';
+import { Dispatch, FC, RefObject, SetStateAction, useCallback } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import CloseIcon from '../svgs/Close';
@@ -9,9 +9,10 @@ import { INote } from '../types/Note';
 type DraftNoteProps = {
   setDraft: Dispatch<SetStateAction<boolean>>;
   onAdd: (note: INote) => void;
+  noteRef: RefObject<HTMLDivElement>;
 };
 
-const DraftNote: FC<DraftNoteProps> = ({ setDraft, onAdd }) => {
+const DraftNote: FC<DraftNoteProps> = ({ setDraft, onAdd, noteRef }) => {
   const handleAdd = useCallback(() => {
     const titleEl = document.getElementById('title') as HTMLInputElement;
     const contentEl = document.getElementById('content') as HTMLTextAreaElement;
@@ -34,7 +35,10 @@ const DraftNote: FC<DraftNoteProps> = ({ setDraft, onAdd }) => {
   }, [onAdd, setDraft]);
 
   return (
-    <article className="relative w-64 h-64 shadow-sm shadow-neutral-400 rounded-md m-3">
+    <article
+      className="relative w-64 h-64 shadow-sm shadow-neutral-400 rounded-md m-3"
+      ref={noteRef}
+    >
       <header className="flex justify-between items-center bg-yellow-300 p-2 rounded-t-md">
         <input
           className="border-b-neutral-100 border-b-2 bg-transparent outline-none"

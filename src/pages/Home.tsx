@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 import DraftNote from '../components/DraftNote';
 import Note from '../components/Note';
@@ -12,6 +12,8 @@ const Home = () => {
 
   const [draft, setDraft] = useState(false);
 
+  const noteRef = useRef<HTMLDivElement>(null);
+
   return (
     <main>
       <article className="flex flex-wrap">
@@ -20,11 +22,16 @@ const Home = () => {
         ))}
 
         {draft ? (
-          <DraftNote setDraft={setDraft} onAdd={onAdd} />
+          <DraftNote setDraft={setDraft} onAdd={onAdd} noteRef={noteRef} />
         ) : (
           <PlusIcon
-            className="w-12 h-12 p-3 m-3 shadow-sm shadow-neutral-400 hover:bg-neutral-100 mx-3 rounded-md cursor-pointer"
-            onClick={() => setDraft(true)}
+            className="fixed bottom-0 right-0 sm:relative bg-neutral-50 w-12 h-12 p-3 m-3 shadow-sm shadow-neutral-400 hover:bg-neutral-100 mx-3 rounded-md cursor-pointer"
+            onClick={() => {
+              setDraft(true);
+              requestAnimationFrame(() => {
+                noteRef.current?.scrollIntoView({ behavior: 'smooth' });
+              });
+            }}
           />
         )}
       </article>
