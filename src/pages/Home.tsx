@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 
 import Draft from '../components/Draft';
 import Note from '../components/Note';
@@ -8,7 +8,7 @@ import useNotes from '../hooks/useNote';
 import PlusIcon from '../svgs/Plus';
 
 const buttonStyle =
-  'px-2 border-2 outline-none bg-neutral-200 hover:bg-neutral-300 disabled:opacity-50';
+  'px-2 outline-none bg-blue-500 text-white enabled:hover:bg-blue-400 disabled:bg-blue-300';
 
 const Home = () => {
   const { notes, onAdd, onRemove, pagination } = useNotes();
@@ -17,8 +17,14 @@ const Home = () => {
 
   const noteRef = useRef<HTMLDivElement>(null);
 
+  const pageGradient = useMemo(() => {
+    const prevColor = pagination.canPrev ? 'from-blue-500' : 'from-blue-300';
+    const nextColor = pagination.canNext ? 'to-blue-500' : 'to-blue-300';
+    return `${prevColor} ${nextColor}`;
+  }, [pagination.canNext, pagination.canPrev]);
+
   return (
-    <main>
+    <main className="flex flex-col justify-between h-screen">
       <article className="flex flex-wrap">
         {notes.map(note => (
           <Note key={note.id} note={note} onRemove={onRemove} />
@@ -42,7 +48,7 @@ const Home = () => {
         )}
       </article>
 
-      <footer className="p-4 text-lg bottom-0 w-full flex justify-center">
+      <footer className="p-2 text-lg w-full flex justify-center">
         <button
           disabled={pagination.page === 1}
           onClick={pagination.onFirst}
@@ -58,7 +64,9 @@ const Home = () => {
           &lt; Prev
         </button>
 
-        <p className="border-y-2 p-2 px-4">{pagination.page}</p>
+        <p className={`p-2 px-4 text-white bg-gradient-to-r ${pageGradient}`}>
+          {pagination.page}
+        </p>
 
         <button
           disabled={!pagination.canNext}
