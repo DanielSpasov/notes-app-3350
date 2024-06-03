@@ -21,7 +21,7 @@ const Note: FC<NoteProps> = ({ note, onRemove }) => {
         </Link>
 
         <CloseIcon
-          className="my-2 mr-2 p-1 w-7 h-7 rounded-md cursor-pointer hover:bg-white"
+          className="my-2 mr-2 p-1 min-w-7 h-7 rounded-md cursor-pointer hover:bg-white"
           onClick={() => onRemove(note)}
         />
       </header>
