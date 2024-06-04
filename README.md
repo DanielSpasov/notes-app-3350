@@ -8,13 +8,19 @@
 git clone https://github.com/DanielSpasov/notes-app-3350
 ```
 
-2. Install the required dependencies:
+2. Navigate to the project directory:
+
+```bash
+cd notes-app-3350
+```
+
+3. Install the required dependencies:
 
 ```bash
 yarn
 ```
 
-3. Start the application:
+4. Start the application:
 
 ```bash
 yarn dev
@@ -32,7 +38,7 @@ import Note from './relative_path_to_component';
 
 2. Render the component in your page:
 
-```tsx
+```jsx
 <Note note={note} onRemove={onRemove} />
 ```
 
@@ -54,7 +60,7 @@ import Draft from './relative_path_to_component';
 
 2. Render the component in your page:
 
-```tsx
+```jsx
 <Draft setDraft={setDraft} onAdd={onAdd} noteRef={noteRef} />
 ```
 
@@ -76,7 +82,7 @@ import useNotes from './relative_path_to_hook';
 
 2. Use the hook in the component
 
-```tsx
+```jsx
 const {
   get,
   notes,
