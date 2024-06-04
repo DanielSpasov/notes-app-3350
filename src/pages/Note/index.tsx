@@ -1,9 +1,9 @@
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useMemo } from 'react';
 
-import useNotes from '../hooks/useNote';
+import useNotes from '../../hooks/useNote';
 
-import BackIcon from '../svgs/Back';
+import BackIcon from '../../svgs/Back';
 
 const Note = () => {
   const { id = '0' } = useParams();

@@ -7,8 +7,8 @@ import useNotes from '../../hooks/useNote';
 
 import PlusIcon from '../../svgs/Plus';
 
-import { buttonStyle, responsiveProps } from './helpers';
-import { getResponsiveProps } from '../../utils';
+export const buttonStyle =
+  'px-2 outline-none bg-blue-500 text-white enabled:hover:bg-blue-400 disabled:bg-blue-300';
 
 const Home = () => {
   const { notes, onAdd, onRemove, pagination } = useNotes();
@@ -26,9 +26,7 @@ const Home = () => {
   return (
     <main className="flex flex-col justify-between h-screen">
       <article
-        className={`grid grid-cols-2 ${getResponsiveProps(
-          responsiveProps.grid
-        )}`}
+        className={`grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6`}
       >
         {notes.map(note => (
           <Note key={note.id} note={note} onRemove={onRemove} />

@@ -4,8 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import CloseIcon from '../../svgs/Close';
 import PlusIcon from '../../svgs/Plus';
 
-import { DraftProps, responsiveProps } from './helpers';
-import { getResponsiveProps } from '../../utils';
+import { DraftProps } from './helpers';
 
 const Draft: FC<DraftProps> = ({ setDraft, onAdd, noteRef }) => {
   const handleAdd = useCallback(() => {
@@ -26,13 +25,9 @@ const Draft: FC<DraftProps> = ({ setDraft, onAdd, noteRef }) => {
     setDraft(false);
   }, [onAdd, setDraft]);
 
-  console.log(getResponsiveProps(responsiveProps.textarea));
-
   return (
     <article
-      className={`relative shadow-sm shadow-neutral-400 rounded-md m-4 w-36 h-36 text-sm ${getResponsiveProps(
-        responsiveProps.note
-      )}`}
+      className={`relative shadow-sm shadow-neutral-400 rounded-md m-4 w-36 h-36 text-sm $sm:w-40 sm:h-40 sm:text-md md:w-44 md:h-44 lg:w-48 lg:h-48 xl:w-52 xl:h-52 xl:text-lg 2xl:w-64 2xl:h-64`}
       ref={noteRef}
     >
       <header className="flex justify-between items-center bg-yellow-300 p-2 rounded-t-md">
@@ -49,9 +44,7 @@ const Draft: FC<DraftProps> = ({ setDraft, onAdd, noteRef }) => {
       </header>
 
       <textarea
-        className={`w-full resize-none px-2 outline-none [&~svg]:hover:opacity-70 max-h-24 min-h-24 text-sm ${getResponsiveProps(
-          responsiveProps.textarea
-        )}`}
+        className={`w-full resize-none px-2 outline-none [&~svg]:hover:opacity-70 max-h-24 min-h-24 text-sm sm:max-h-28 sm:min-h-28 sm:text-md md:max-h-32 md:min-h-32 lg:max-h-36 lg:min-h-36 xl:max-h-40 xl:min-h-40 xl:text-lg 2xl:max-h-52 2xl:min-h-52`}
         placeholder="Note content..."
         id="content"
       />
